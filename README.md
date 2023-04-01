@@ -31,9 +31,9 @@ TomaAwita is a C++ program designed to remind you to drink water based on your B
 -Sistema operativo Windows.
 -Windows operating system.
 # Agradecimientos / Credits
-Este programa fue desarrollado por [tu nombre] con el objetivo de ayudar a las personas a mantenerse hidratadas y activas durante largas horas sentadas frente a un computador. Agradezco a la comunidad de programadores por su ayuda y recursos valiosos para el desarrollo de este proyecto.
+Este programa fue desarrollado por Roque A. Ramírez con el objetivo de ayudar a las personas a mantenerse hidratadas y activas durante largas horas sentadas frente a un computador. Agradezco a la comunidad de programadores por su ayuda y recursos valiosos para el desarrollo de este proyecto.
 
-TomaAwita was developed by [your name] with the goal of promoting healthy habits in computer users. Thanks to the programming community for their valuable resources and support during the development of this project.
+TomaAwita was developed by Roque A. Ramírez with the goal of promoting healthy habits in computer users. Thanks to the programming community for their valuable resources and support during the development of this project.
 # Licencia / License
 Este programa se distribuye para todo el público. No me hago responsable por cualquier mal uso o daño causado por el uso de este programa. Este proyecto fue desarrollado con un objetivo altruista para ayudar a quienes lo necesitan.
 
