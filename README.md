@@ -1,7 +1,7 @@
 # TomaAwita
-TomaAwita es una aplicación de C++ diseñada para recordarte tomar agua y hacer pausas activas según tu índice de masa corporal (IMC).
+TomaAwita es una aplicación con versiones en C++, C# y Python diseñada para recordarte tomar agua y hacer pausas activas según tu índice de masa corporal (IMC).
 
-TomaAwita is a C++ program designed to remind you to drink water based on your BMI, which you input before starting the timer. It also includes reminders for taking breaks during long hours of sitting in front of a computer. These breaks are for performing stretching exercises and taking visual breaks.
+TomaAwita is a C++,C++, C# and Python program designed to remind you to drink water based on your BMI, which you input before starting the timer. It also includes reminders for taking breaks during long hours of sitting in front of a computer. These breaks are for performing stretching exercises and taking visual breaks.
 
 # Características / Features
 -La aplicación es fácil de usar y configurar.
