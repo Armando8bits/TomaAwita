@@ -1,14 +1,14 @@
-/* Codigo sacado de: https://www.codigazo.com/en-c/codigo-ejemplo-crear-ventana-en-c
+/* Codigo para inicializar ventana sacado de: https://www.codigazo.com/en-c/codigo-ejemplo-crear-ventana-en-c
  */
 
 #define _WIN32_WINNT 0x0500 // Es necesaria esta definicion para esconder ventana de consola
 #include <thread>           //para hablitar hilos
 #include <windows.h>        // Libreria que contiene las funciones de Winapi
-// declaraciones de controles con eventos:
-#define Btn1 101
+//  declaraciones de controles con eventos:
+#define Btn1 101 // boton Principal
 #define ID_EDIT1 102
 #define ID_EDIT2 103
-// #define ID_Label 104
+#define ID_LINK 104 //label de mi nombre que abre link a Github
 //  #define BTN2 102.. y así sucesivamente con cada nuevo boton o control
 
 void Reloj(int, int);
@@ -17,6 +17,7 @@ HWND CmdGo;
 HWND LblDatos;
 HWND LblDatos2;
 HWND LblTiempo;
+HWND LblLink; //label de mi nombre que abre link a Github
 
 bool ProgramaActivo = false;
 /*  Declaracion del procedimiento de windows  */
@@ -75,13 +76,15 @@ int WINAPI WinMain(HINSTANCE hThisInstance,
     // CREA LOS LABELS QUE NO SE MODIFICAN:
     CreateWindowW(L"Static", L"Su peso en KG:", WS_VISIBLE | WS_CHILD | ES_LEFT, 5, 5, 150, 20, ventana1, 0, 0, 0);
     CreateWindowW(L"Static", L"MiliLitro por vaso:", WS_VISIBLE | WS_CHILD | ES_LEFT, 5, 30, 200, 20, ventana1, 0, 0, 0);
-    CreateWindowW(L"Static", L"Creado por: Armando Ramírez", WS_VISIBLE | WS_CHILD, 40, 140, 200, 20, ventana1, 0, 0, 0);
+    LblLink = CreateWindowW(L"Static", L"Creado por: Armando Ramírez", WS_VISIBLE | WS_CHILD | SS_NOTIFY, 40, 140, 200, 20, ventana1, (HMENU)ID_LINK, 0, 0); // SS_NOTIFY es necesario para que detecte el evento click
+    SetClassLongPtr(LblLink, GCLP_HCURSOR, (LONG_PTR)LoadCursor(NULL, IDC_HAND)); // Establecer el cursor del ratón como mano al pasar sobre el label
+
     LblTiempo = CreateWindowW(L"Static", L"-", WS_VISIBLE | WS_CHILD, 115, 95, 200, 20, ventana1, 0, 0, 0); //(HMENU)ID_Label
     LblDatos = CreateWindowW(L"Static", L"-", WS_VISIBLE | WS_CHILD, 5, 75, 200, 20, ventana1, 0, 0, 0);
     LblDatos2 = CreateWindowW(L"Static", L"-", WS_VISIBLE | WS_CHILD, 5, 55, 200, 20, ventana1, 0, 0, 0);
     // CREA LOS TEXTBOX:
-    CreateWindowEx(0, "EDIT", "85", ES_NUMBER | ES_AUTOHSCROLL | ES_CENTER | WS_CHILD | WS_VISIBLE | WS_BORDER, 150, 5, 70, 20, ventana1, (HMENU)ID_EDIT1, 0, 0);
-    CreateWindowEx(0, "EDIT", "500", ES_NUMBER | ES_AUTOHSCROLL | ES_CENTER | WS_CHILD | WS_VISIBLE | WS_BORDER, 150, 30, 70, 20, ventana1, (HMENU)ID_EDIT2, 0, 0);
+    CreateWindowEx(WS_EX_CLIENTEDGE, "EDIT", "85", ES_NUMBER | ES_AUTOHSCROLL | ES_CENTER | WS_CHILD | WS_VISIBLE | WS_BORDER, 150, 5, 70, 20, ventana1, (HMENU)ID_EDIT1, 0, 0); // WS_EX_CLIENTEDGE da un aspecto 3D pero puedes poner 0
+    CreateWindowEx(WS_EX_CLIENTEDGE, "EDIT", "500", ES_NUMBER | ES_AUTOHSCROLL | ES_CENTER | WS_CHILD | WS_VISIBLE | WS_BORDER, 150, 30, 70, 20, ventana1, (HMENU)ID_EDIT2, 0, 0);
 
     /* Hacemos que la ventana sea visible */
 
@@ -105,7 +108,7 @@ LRESULT CALLBACK WindowProcedure(HWND ventana1, UINT mensajecomunica, WPARAM wPa
     {
     case WM_CLOSE: /* Que hacer en caso de recibir el mensaje WM_CLOSE*/
         if (ProgramaActivo == false || (MessageBox(ventana1, "Desea Dejar de recibir el recordatorio? No te olvides de seguir tomando Aguita uwu", "Salir.", MB_OKCANCEL | MB_ICONQUESTION) == IDOK))
-        {//cierra el programa si no se está ejecutando el cronometro.... caso contrario pregunta antes de cerrar
+        {                            // cierra el programa si no se está ejecutando el cronometro.... caso contrario pregunta antes de cerrar
             DestroyWindow(ventana1); /* Destruir la ventana */
         }
         break;
@@ -140,6 +143,11 @@ LRESULT CALLBACK WindowProcedure(HWND ventana1, UINT mensajecomunica, WPARAM wPa
                     ShowWindow(ventana1, SW_MINIMIZE);            // minimiza la ventana
                 }
             }
+        }
+        else if (LOWORD(ID_LINK) == wParam)
+        {
+            // Abrir el enlace en el navegador predeterminado al hacer click en label
+            ShellExecute(NULL, "open", "https://github.com/Armando8bits", NULL, NULL, SW_SHOWNORMAL);
         }
         break;
     default: /* Tratamiento por defecto para mensajes que no especificamos */
