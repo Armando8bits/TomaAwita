@@ -2,7 +2,6 @@
  */
 
 #define _WIN32_WINNT 0x0500 // Es necesaria esta definicion para esconder ventana de consola
-#include <iostream>         //no se x q pero parece necesario para los hilos
 #include <thread>           //para hablitar hilos
 #include <windows.h>        // Libreria que contiene las funciones de Winapi
 // declaraciones de controles con eventos:
